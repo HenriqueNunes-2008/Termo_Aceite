@@ -4,12 +4,17 @@ import pdfkit
 import os
 import uuid
 import base64
+import platform
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "static/uploads"
 app.secret_key = 'admin_secret_key_123'
 
-WKHTMLTOPDF_PATH = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+if platform.system() == "Windows":
+    WKHTMLTOPDF_PATH = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
+else:
+    WKHTMLTOPDF_PATH = "/usr/bin/wkhtmltopdf"  # Docker/Linux
+
 config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
 
 def get_image_base64(filename):
@@ -225,3 +230,4 @@ current_project_name = "Projeto sem nome"
 if __name__ == "__main__":
     os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
     app.run(debug=True)
+
