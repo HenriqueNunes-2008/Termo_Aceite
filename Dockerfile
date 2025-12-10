@@ -1,8 +1,5 @@
 FROM surnet/alpine-wkhtmltopdf:3.19.0-0.12.6-full
 
-# Garantir que o wkhtmltopdf está lá
-RUN which wkhtmltopdf || ls -lah /usr/bin/
-
 # Instalar Python
 RUN apk add --no-cache python3 py3-pip py3-virtualenv
 
@@ -18,4 +15,8 @@ COPY . .
 
 EXPOSE 5000
 
+# REMOVE o entrypoint padrão (wkhtmltopdf)
+ENTRYPOINT []
+
+# Agora sim o Gunicorn roda
 CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
