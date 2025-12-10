@@ -13,7 +13,8 @@ app.secret_key = 'admin_secret_key_123'
 if platform.system() == "Windows":
     WKHTMLTOPDF_PATH = r"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"
 else:
-    WKHTMLTOPDF_PATH = "/usr/bin/wkhtmltopdf"  # Docker/Linux
+    # Caminho correto no Docker Alpine (Render)
+    WKHTMLTOPDF_PATH = "/usr/local/bin/wkhtmltopdf"
 
 config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
 
@@ -230,4 +231,5 @@ current_project_name = "Projeto sem nome"
 if __name__ == "__main__":
     os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
     app.run(debug=True)
+
 
