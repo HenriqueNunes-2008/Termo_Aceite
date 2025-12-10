@@ -1,11 +1,19 @@
 FROM surnet/alpine-wkhtmltopdf:3.19.0-0.12.6-full
 
-# Install Python
-RUN apk add --no-cache python3 py3-pip
+# Install Python + venv support
+RUN apk add --no-cache python3 py3-pip py3-virtualenv
 
 WORKDIR /app
 
+# Create virtual environment
+RUN python3 -m venv /app/venv
+
+# Ensure venv pip is used
+ENV PATH="/app/venv/bin:$PATH"
+
 COPY requirements.txt .
+
+# Install Python dependencies in venv
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
