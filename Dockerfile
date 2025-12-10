@@ -9,10 +9,11 @@ RUN apt-get update && apt-get install -y \
     wget
 
 # Download and install wkhtmltopdf (versão estável)
-RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.debian11_amd64.deb \
+RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.debian12_amd64.deb \
     -O /tmp/wkhtmltopdf.deb && \
     apt-get install -y /tmp/wkhtmltopdf.deb && \
     rm /tmp/wkhtmltopdf.deb
+
 
 # Set working directory
 WORKDIR /app
@@ -29,3 +30,4 @@ EXPOSE 5000
 
 # Start app
 CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+
