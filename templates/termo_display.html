@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ projeto }} - Termo de Aceite</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        h2 { text-align: center; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+<h1>{{ projeto }}</h1>
+<hr>
+
+<h2>TERMO DE ACEITE E ENTREGA DE SERVIÇOS<br>UNIDADE MÓVEL DE SAÚDE</h2>
+
+<p>
+    <strong>Data:</strong> {{ dados.dia }}/{{ dados.mes }}/{{ dados.ano }}
+</p>
+
+<p><strong>CLIENTE:</strong> {{ dados.cliente }}</p>
+
+<p><strong>OBJETO:</strong> {{ dados.objeto }}</p>
+
+<p><strong>LOCAL DE ENTREGA:</strong> {{ dados.local_entrega }}</p>
+
+<p>
+    Recebi da FLEXIMEDICAL SOLUÇÕES EM SAÚDE LTDA - CNPJ 07.384.026/0001-20,
+    os serviços de entrega/reforma conforme especificado.
+</p>
+
+<p><strong>Status da entrega:</strong> {{ dados.status }}</p>
+
+<p>Por estarem assim ajustadas, as partes assinam o presente termo dando por encerradas todas as responsabilidades
+     e atividades referentes aos serviços da customização.</p>
+
+<h3>Dados do Comprador</h3>
+<p><strong>Nome:</strong> {{ dados.comprador_nome }}</p>
+<p><strong>RG:</strong> {{ dados.comprador_rg }}</p>
+
+<h3>Representante Fleximedical</h3>
+<p><strong>Nome:</strong> {{ dados.flex_nome }}</p>
+<p><strong>RG:</strong> {{ dados.flex_rg }}</p>
+
+</body>
+</html>

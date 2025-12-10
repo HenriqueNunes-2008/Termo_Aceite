@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Registros Salvos</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.12);
+        }
+
+        .section h2 {
+            margin-top: 0;
+            color: #444;
+            text-align: center;
+        }
+
+        .record {
+            background: #eef3ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .field {
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .field strong {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        th {
+            background: #eef3ff;
+            font-weight: bold;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 10px;
+            margin-top: 15px;
+            text-decoration: none;
+            transition: 0.2s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: #005bbb;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #bbb;
+            margin-top: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e7e34;
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+            th, td {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Admin - Registros Salvos</h1>
+
+<!-- DEFINIR NOME DO PROJETO -->
+<div class="section">
+    <h2>Definir Nome do Projeto</h2>
+
+    <form action="/definir_projeto" method="POST">
+        <label><strong>Nome do projeto atual:</strong> {{ current_project_name }}</label>
+        <br><br>
+
+        <label><strong>Novo nome do projeto:</strong></label>
+        <input type="text" name="nome_projeto" required placeholder="Ex: CDS-32">
+        <br><br>
+
+        <button type="submit">Salvar Nome do Projeto</button>
+    </form>
+</div>
+                                                                                                                                    
+<!-- TERMOS -->
+<div class="section">
+    <h2>Termos de Aceite</h2>
+
+    {% if termos %}
+        {% for registro in termos %}
+            <div class="record">
+
+                <div class="field"><strong>Projeto:</strong> {{ current_project_name }}</div>
+
+                {% for key, value in registro.items() %}
+                    {% if key not in ['id'] %}
+                        <div class="field"><strong>{{ key }}:</strong> {{ value }}</div>
+                    {% endif %}
+                {% endfor %}
+
+                <a class="btn" href="/pdf_termo/{{ registro.id }}">Baixar PDF</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Nenhum termo salvo ainda.</p>
+    {% endif %}
+</div>
+
+
+<!-- RESSALVAS -->
+<div class="section">
+    <h2>Ressalvas</h2>
+
+    {% if ressalvas %}
+        {% for registro in ressalvas %}
+            <div class="record">
+
+                <div class="field"><strong>Projeto:</strong> {{ current_project_name }}</div>
+
+                <table>
+                    <tr>
+                        <th>Item</th>
+                        <th>Descrição</th>
+                        <th>Prazo</th>
+                        <th>Aprovação</th>
+                    </tr>
+
+                    {% for i in range(7) %}
+                        <tr>
+                            <td>{{ registro.get('item' ~ i, '') }}</td>
+                            <td>{{ registro.get('desc' ~ i, '') }}</td>
+                            <td>{{ registro.get('prazo' ~ i, '') }}</td>
+                            <td>{{ registro.get('aprov' ~ i, '') }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+                <div class="field"><strong>Representante:</strong> {{ registro.get('Representante', '') }}</div>
+                <div class="field"><strong>CPF:</strong> {{ registro.get('CPF', '') }}</div>
+
+                <a class="btn" href="/pdf_ressalvas/{{ registro.id }}">Baixar PDF</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Nenhuma ressalva salva ainda.</p>
+    {% endif %}
+</div>
+
+
+<!-- NPS -->
+<div class="section">
+    <h2>Avaliações NPS</h2>
+
+    {% if nps %}
+        {% for registro in nps %}
+
+            <div class="record">
+
+                <div class="field"><strong>Projeto:</strong> {{ current_project_name }}</div>
+
+                <!-- Nota geral -->
+                <div class="field">
+                    <strong>NPS - De 0 a 10, quanto você recomendaria a Fleximedical? :</strong> {{ registro.nota }}
+                </div>
+
+                <!-- ECSAT -->
+                <h3>eCSAT</h3>
+                <table>
+                    <tr><th>Pergunta</th><th>Resposta</th></tr>
+                    <tr><td>Clareza das informações do vendedor</td><td>{{ registro.csat0 }}</td></tr>
+                    <tr><td>Compreensão das necessidades</td><td>{{ registro.csat1 }}</td></tr>
+                    <tr><td>Comunicação durante a construção</td><td>{{ registro.csat2 }}</td></tr>
+                    <tr><td>Prazo de entrega</td><td>{{ registro.csat3 }}</td></tr>
+                    <tr><td>Atendimento pós-venda</td><td>{{ registro.csat4 }}</td></tr>
+                    <tr><td>Qualidade da unidade móvel</td><td>{{ registro.csat5 }}</td></tr>
+                </table>
+
+                <!-- Perguntas abertas -->
+                <h3>Perguntas Abertas</h3>
+
+                <div class="field"><strong>• Qual foi o ponto mais positivo da sua experiência?</strong><br>R: {{ registro.aberto1 }}</div>
+                <div class="field"><strong>• O que podemos melhorar para tornar sua experiência ainda melhor?</strong><br>R: {{ registro.aberto2 }}</div>
+                <div class="field"><strong>• Houve algum ponto que não correspondeu às suas expectativas? Qual?</strong><br>R: {{ registro.aberto3 }}</div>
+                <div class="field"><strong>• Como podemos surpreender você na próxima entrega?</strong><br>R: {{ registro.aberto4 }}</div>
+
+                <a class="btn" href="/pdf_nps/{{ registro.id }}">Baixar PDF</a>
+
+            </div>
+
+        {% endfor %}
+    {% else %}
+        <p>Nenhum NPS salvo ainda.</p>
+    {% endif %}
+</div>
+
+<a class="btn" href="/admin_logout">Logout</a>
+
+</body>
+</html>

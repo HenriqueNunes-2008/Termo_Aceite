@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>  
+    <meta charset="UTF-8">
+    <title>Ressalvas</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        table { width:100%; border-collapse: collapse; }
+        th, td { border: 1px solid #000; padding: 6px; }
+
+        .flash {
+            width: 90%;
+            margin: 20px auto;
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+        }
+        .flash.success { background-color: #28a745; }
+        .flash.error { background-color: #d9534f; }
+    </style>
+</head>
+<body>
+
+    <h1>{{ projeto }}</h1>
+    <hr>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <h2>Ressalvas Encontradas</h2>
+
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Descrição da Ressalva</th>
+            <th>Prazo do Reparo</th>
+            <th>Aprovação</th>
+        </tr>
+
+        {% for i in range(7) %}
+        <tr>
+            <td>{{ dados.get('item' + i|string, '') }}</td>
+            <td>{{ dados.get('desc' + i|string, '') }}</td>
+            <td>{{ dados.get('prazo' + i|string, '') }}</td>
+            <td>{{ dados.get('aprov' + i|string, '') }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% if foto_base64 %}
+    <br><br>
+    <p><strong>Foto das Ressalvas:</strong></p>
+    <img src="{{ foto_base64 }}" alt="Foto das Ressalvas" style="max-width: 100%; height: auto;">
+    {% endif %}
+
+    <br><br>
+
+    <p><strong>APROVAÇÃO FINAL APÓS AS RESSALVAS REALIZADAS:</strong></p>
+    <p>Representante: {{ dados.get('Representante', '') }}</p>
+    <p>CPF: {{ dados.get('CPF', '') }}</p>
+
+</body>
+</html>

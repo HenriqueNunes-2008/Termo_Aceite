@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Resultado da Pesquisa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .container {
+        background: white;
+        width: 100%;
+        max-width: 520px;
+        padding: 25px;
+        border-radius: 14px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+        text-align: center;
+        color: #444;
+        font-weight: bold;
+        margin-bottom: 25px;
+    }
+
+    .result-block {
+        background: #eef3ff;
+        padding: 18px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .label {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .value {
+        background: white;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        line-height: 1.5;
+    }
+
+    .nota-badge {
+        display: inline-block;
+        padding: 12px 18px;
+        border-radius: 12px;
+        font-size: 22px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .red { background: #d9534f; }
+    .yellow { background: #f0e553; color: #444 !important; }
+    .green { background: #5cb85c; }
+
+</style>
+</head>
+
+<body>
+
+    <h1>{{ projeto }}</h1>
+    <hr>
+
+    <div class="container">
+
+        <h2>Resultado da Pesquisa</h2>
+
+        <!-- NOTA NPS -->
+        <div class="label">Nota NPS:</div>
+        <div class="value">
+            {% if dados.nota|int <= 6 %}
+                <span class="nota-badge red">{{ dados.nota }}</span>
+            {% elif dados.nota|int <= 8 %}
+                <span class="nota-badge yellow">{{ dados.nota }}</span>
+            {% else %}
+                <span class="nota-badge green">{{ dados.nota }}</span>
+            {% endif %}
+        </div>
+
+        <!-- eCSAT -->
+        <div class="label">Avaliação eCSAT (0 a 5):</div>
+        <div class="value">
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="background: #eef3ff;">
+                    <th style="padding: 8px; border: 1px solid #ccc; text-align: left;">Pergunta</th>
+                    <th style="padding: 8px; border: 1px solid #ccc; text-align: center;">Resposta</th>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ccc;">Clareza das informações do vendedor</td>
+                    <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">{{ dados.csat0 }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ccc;">Compreensão das necessidades</td>
+                    <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">{{ dados.csat1 }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ccc;">Comunicação durante a construção</td>
+                    <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">{{ dados.csat2 }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ccc;">Prazo de entrega</td>
+                    <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">{{ dados.csat3 }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ccc;">Atendimento pós-venda</td>
+                    <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">{{ dados.csat4 }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ccc;">Qualidade da unidade móvel</td>
+                    <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">{{ dados.csat5 }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Comentários e Perguntas Abertas -->
+        {% if dados.comentario %}
+            <div class="label">Comentário Geral:</div>
+            <div class="value">{{ dados.comentario }}</div>
+        {% endif %}
+
+        {% if dados.aberto1 %}
+            <div class="label">Ponto mais positivo:</div>
+            <div class="value">{{ dados.aberto1 }}</div>
+        {% endif %}
+
+        {% if dados.aberto2 %}
+            <div class="label">O que podemos melhorar:</div>
+            <div class="value">{{ dados.aberto2 }}</div>
+        {% endif %}
+
+        {% if dados.aberto3 %}
+            <div class="label">O que não correspondeu às expectativas:</div>
+            <div class="value">{{ dados.aberto3 }}</div>
+        {% endif %}
+
+        {% if dados.aberto4 %}
+            <div class="label">Como podemos surpreender você:</div>
+            <div class="value">{{ dados.aberto4 }}</div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
