@@ -8,11 +8,9 @@
 
 <style>
     body {
+        margin: 0;
         font-family: Arial, sans-serif;
-        background: #f5f5f5;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
+        background: #ffffff;
     }
 
     .container {
@@ -151,11 +149,42 @@
             font-size: 15px;
         }
     }
+.topbar { background: linear-gradient(to right, #007bff, #0725d3); color: white; padding: 40px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+.logo { position: absolute; height: 35%; top: -13%; left: 20px; z-index: 1; }
+.address { position: relative; text-align: right; top: -20px; font-size: 12px; color: white; flex: 1; margin-right: 5%; }
+.contact-info { position: relative; top: -20px; text-align: right; font-size: 12px; color: white; }
+.contact-info a { color: white; text-decoration: none; font-size: 12px; margin-left: 5px; }
+.contact-info a:first-child { margin-left: 0; }
+.contact-info a:hover { text-decoration: underline; }
+.navigation { position: relative; top: -20px; text-align: right; font-size: 12px; color: white; }
+.navigation a { color: white; text-decoration: none; margin-left: 5px; }
+.navigation a:first-child { margin-left: 0; }
+.navigation a:hover { text-decoration: underline; }
 
 </style>
 </head>
 
 <body>
+    <!-- LOGO (AGORA COM url_for) -->
+    <img src="{{ url_for('static', filename='logo_fleximedical.png') }}" class="logo">
+
+    <div class="topbar">
+        <div class="address">
+            R. José Antônio Valadares, 285 – Vila Liviero<br>
+            São Paulo – SP. CEP: 04185-020
+        </div>
+        <div class="contact-info">
+            comercial@soukure.com.br<br>
+            <strong>(11) 2372-7444</strong>
+        </div>
+        <div class="navigation">
+            <a href="{{ url_for('home') }}">PAGINA INICIAL</a> |
+            <a href="{{ url_for('termo') }}">TERMO DE ACEITE</a> |
+            <a href="{{ url_for('ressalvas') }}">RESSALVA</a> |
+            <a href="{{ url_for('nps') }}">NPS</a>
+        </div>
+    </div>
+
 <div class="container">
 
     <h2>Pesquisa de Satisfação</h2>
