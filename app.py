@@ -7,7 +7,7 @@ import base64
 import platform
 import shutil
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='Static')
 app.config["UPLOAD_FOLDER"] = "static/uploads"
 app.secret_key = 'admin_secret_key_123'
 
@@ -232,6 +232,7 @@ current_project_name = "Projeto sem nome"
 if __name__ == "__main__":
     os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
     app.run(debug=True)
+
 
 
 
