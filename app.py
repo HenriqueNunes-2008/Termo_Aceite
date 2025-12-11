@@ -128,10 +128,26 @@ def nps():
 # =============================================
 #                  ADMIN
 # =============================================
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if username == "admin" and password == "admin123":
+            session["admin"] = True
+            return redirect(url_for("admin"))
+
+        flash("Usuário ou senha inválidos", "error")
+        return redirect(url_for("login"))
+
+    return render_template("login.html")
+
 @app.route("/admin")
 def admin():
     if "admin" not in session:
-        return redirect(url_for("home"))
+        return redirect(url_for("login"))
 
     return render_template(
         "admin.html",
@@ -141,22 +157,10 @@ def admin():
         current_project_name=current_project_name
     )
 
-@app.route("/admin_login", methods=["POST"])
-def admin_login():
-    username = request.form.get("username")
-    password = request.form.get("password")
-
-    if username == "admin" and password == "admin123":
-        session["admin"] = True
-        return redirect(url_for("admin"))
-
-    flash("Usuário ou senha inválidos", "error")
-    return redirect(url_for("home"))
-
 @app.route("/admin_logout")
 def admin_logout():
     session.pop("admin", None)
-    return redirect(url_for("home"))
+    return redirect(url_for("login"))
 
 # =============================================
 #              DEFINIR NOME DO PROJETO
@@ -232,6 +236,7 @@ current_project_name = "Projeto sem nome"
 if __name__ == "__main__":
     os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
     app.run(debug=True)
+
 
 
 
