@@ -16,7 +16,7 @@
 <h2>TERMO DE ACEITE E ENTREGA DE SERVIÇOS<br>UNIDADE MÓVEL DE SAÚDE</h2>
 
 <p>
-    <strong>Data:</strong> {{ dados.dia }}/{{ dados.mes }}/{{ dados.ano }}
+    <strong>Data:</strong> {% if dados.data %}{{ dados.data.split('-')[2] }}/{{ dados.data.split('-')[1] }}/{{ dados.data.split('-')[0] }}{% else %}Data não informada{% endif %}
 </p>
 
 <p><strong>CLIENTE:</strong> {{ dados.cliente }}</p>
@@ -45,3 +45,4 @@
 
 </body>
 </html>
+
