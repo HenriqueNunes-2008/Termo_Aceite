@@ -181,3 +181,25 @@ body {
     .title { font-size: 5.5vw; }
     .option { width: 90%; }
 }
+
+/* Ícone Admin */
+.admin-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 50;
+}
+
+.admin-btn img {
+    width: 45px;
+    height: 45px;
+    filter: brightness(0) invert(1);
+    opacity: 0.7;
+    transition: 0.2s;
+}
+
+.admin-btn img:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    cursor: pointer;
+}
