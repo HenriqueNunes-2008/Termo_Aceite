@@ -8,11 +8,22 @@
 
     <style>
         /* --- TODO SEU CSS FOI MANTIDO 100% IGUAL --- */
-        body { margin: 0; font-family: Arial, sans-serif; background: #ffffff; }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+        }
         .topbar { background: linear-gradient(to right, #007bff, #0725d3); color: white; padding: 40px; display: flex; justify-content: space-between; align-items: center; position: relative; }
         .logo { position: absolute; height: 35%; top: -13%; left: 20px; z-index: 1; }
         .address { position: relative; text-align: right; top: -20px; font-size: 12px; color: white; flex: 1; margin-right: 5%; }
         .contact-info { position: relative; top: -20px; text-align: right; font-size: 12px; color: white; }
+        .contact-info a { color: white; text-decoration: none; font-size: 12px; margin-left: 5px; }
+        .contact-info a:first-child { margin-left: 0; }
+        .contact-info a:hover { text-decoration: underline; }
+        .navigation { position: relative; top: -20px; text-align: right; font-size: 12px; color: white; }
+        .navigation a { color: white; text-decoration: none; margin-left: 5px; }
+        .navigation a:first-child { margin-left: 0; }
+        .navigation a:hover { text-decoration: underline; }
         .titulo-box { text-align: center; margin-top: 20px; }
         .titulo-box h1 { font-size: 24px; font-weight: bold; color: #0004fa; margin-bottom: 8px; }
         .titulo-box h2 { background: #2f22b8; color: white; display: inline-block; padding: 6px 20px; font-size: 18px; margin-top: 0; }
@@ -50,6 +61,12 @@
         <div class="contact-info">
             comercial@soukure.com.br<br>
             <strong>(11) 2372-7444</strong>
+        </div>
+        <div class="navigation">
+            <a href="{{ url_for('home') }}">PAGINA INICIAL</a> |
+            <a href="{{ url_for('termo') }}">TERMO DE ACEITE</a> |
+            <a href="{{ url_for('ressalvas') }}">RESSALVA</a> |
+            <a href="{{ url_for('nps') }}">NPS</a>
         </div>
     </div>
 
