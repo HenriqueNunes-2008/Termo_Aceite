@@ -51,7 +51,7 @@ def termo():
         session['registro_id'] = registro_id
 
         flash("Termo salvo com sucesso!", "success")
-        return redirect(url_for("home"))
+        return redirect(url_for("termo.html"))
 
     return render_template("termo.html")
 
@@ -65,7 +65,7 @@ def ressalvas():
 
         if not registro_id:
             flash("Erro: Salve o Termo antes de registrar as ressalvas.", "error")
-            return redirect(url_for("home"))
+            return redirect(url_for("termo.html"))
 
         registro = request.form.to_dict()
         registro["id"] = registro_id
@@ -82,7 +82,7 @@ def ressalvas():
         registros_ressalvas.append(registro)
 
         flash("Ressalvas salvas com sucesso!", "success")
-        return redirect(url_for("home"))
+        return redirect(url_for("ressalvas.html"))
 
     return render_template("ressalvas.html")
 
@@ -96,7 +96,7 @@ def nps():
 
         if not registro_id:
             flash("Erro: Salve o Termo antes de registrar o NPS.", "error")
-            return redirect(url_for("home"))
+            return redirect(url_for("nps.html"))
 
         registro = {
             "id": registro_id,
@@ -121,7 +121,7 @@ def nps():
         registros_nps.append(registro)
 
         flash("NPS registrado com sucesso!", "success")
-        return redirect(url_for("home"))
+        return redirect(url_for("nps.html"))
 
     return render_template("nps.html")
 
@@ -236,6 +236,7 @@ current_project_name = "Projeto sem nome"
 if __name__ == "__main__":
     os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
     app.run(debug=True)
+
 
 
 
