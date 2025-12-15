@@ -66,7 +66,19 @@ def ressalvas():
         if not registro_id:
             flash("Erro: Salve o Termo antes de registrar as ressalvas.", "error")
             return redirect(url_for("ressalvas"))
+            
+ # Campos obrigatórios (NÃO inclui a foto)
+        campos_obrigatorios = [
+            "descricao",      # exemplo
+            "responsavel",    # ajuste para os nomes reais do seu form
+            "prazo",
+            "status"
+        ]
 
+        for campo in campos_obrigatorios:
+            if not request.form.get(campo):
+                flash("Preencha todos os campos obrigatórios da Ressalva.", "error")
+                return redirect(url_for("ressalvas"))
         registro = request.form.to_dict()
         registro["id"] = registro_id
 
@@ -236,6 +248,7 @@ current_project_name = "Projeto sem nome"
 if __name__ == "__main__":
     os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
     app.run(debug=True)
+
 
 
 
