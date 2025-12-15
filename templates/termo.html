@@ -28,7 +28,7 @@
         .titulo-box h1 { font-size: 24px; font-weight: bold; color: #0004fa; margin-bottom: 8px; }
         .titulo-box h2 { background: #2f22b8; color: white; display: inline-block; padding: 6px 20px; font-size: 18px; margin-top: 0; }
         .container { position: relative; background: rgb(243, 243, 243); width: 90%; max-width: 800px; margin: 30px auto; padding: 25px; border-radius: 10px; box-shadow: 0 4px 18px rgba(0,0,0,0.1); }
-        .logo2 { position: absolute; top: 1%; right: 5%; height: 120px; opacity: 0.15; z-index: 0; pointer-events: none; }
+        .logo3 { position: absolute; top: 1%; right: 5%; height: 120px; opacity: 0.15; z-index: 0; pointer-events: none; }
         .row { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
         .col { flex: 1; min-width: 200px; }
         label { font-size: 14px; font-weight: bold; color: #1f1f1f; }
@@ -78,7 +78,7 @@
     <div class="container">
 
         <!-- MARCA D’ÁGUA (com url_for) -->
-        <img src="{{ url_for('static', filename='LogoFlexcolor.png') }}" class="logo2">
+        <img src="{{ url_for('static', filename='LogoFlexcolor.png') }}" class="logo3">
 
         <!-- FLASH MESSAGES -->
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -196,5 +196,6 @@
 
 </body>
 </html>
+
 
 
