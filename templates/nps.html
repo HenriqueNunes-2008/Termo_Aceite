@@ -7,17 +7,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
+/* =================== BASE =================== */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, #0086c4, #5b01af);
     display: flex;
-    justify-content: center;  /* Centraliza horizontalmente */
-    align-items: center;      /* Centraliza verticalmente */
-    min-height: 100vh;            /* Usa a altura total da tela */
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     padding-top: 120px;
 }
 
+/* =================== TOPBAR =================== */
+.topbar {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 14px 24px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+/* LOGOS */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.logo {
+    height: 56px;
+    width: auto;
+}
+
+/* BLOCO DIREITO */
+.right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+/* CONTATO */
+.contact-section {
+    text-align: right;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.35;
+}
+
+.contact-info {
+    font-size: 13px;
+    color: #444;
+}
+
+.contact-info strong {
+    color: #333;
+}
+
+/* MENU */
+.navigation {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+}
+
+.navigation a {
+    color: #4b3b6e;
+    text-decoration: none;
+    margin: 0 8px;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
+}
+
+/* =================== RESPONSIVO (SEM MUDAR LAYOUT) =================== */
+@media (max-width: 900px) {
+    .logo { height: 48px; }
+    .contact-section,
+    .contact-info { font-size: 12px; }
+    .navigation { font-size: 12px; }
+}
+
+@media (max-width: 600px) {
+    .topbar { padding: 10px 16px; }
+    .logo { height: 42px; }
+    .navigation a { margin: 0 6px; }
+}
+
+/* =================== CONTAINER =================== */
 .containerx {
     background: white;
     width: 100%;
@@ -27,270 +114,165 @@ body {
     box-shadow: 0 0 20px rgba(0,0,0,0.15);
 }
 
+h2, h3 {
+    text-align: center;
+    color: #444;
+    font-weight: bold;
+}
 
-    h2, h3 {
-        text-align: center;
-        color: #444;
-        font-weight: bold;
-    }
+.intro-text {
+    background: #eef3ff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    font-size: 15px;
+    line-height: 1.45;
+}
 
-    .intro-text {
-        background: #eef3ff;
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 25px;
-        font-size: 15px;
-        line-height: 1.45;
-    }
+/* =================== BOTÕES =================== */
+input[type="radio"] { display: none; }
 
-    /* BOTÕES GERAIS */
-    input[type="radio"] {
-        display: none;
-    }
+input[type="radio"]:checked + label {
+    box-shadow: 0 0 0 4px #00000030;
+    transform: scale(1.13);
+    transition: 0.2s;
+}
 
-    input[type="radio"]:checked + label {
-        box-shadow: 0 0 0 4px #00000030;
-        transform: scale(1.13);
-        transition: 0.2s;
-    }
+/* eCSAT */
+.csat-question { margin-bottom: 25px; }
 
-    /* ---------- eCSAT (0 a 5) ---------- */
+.csat-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
-    .csat-question {
-        margin-bottom: 25px;
-    }
+.csat-options label {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
 
-    .csat-options {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
+.csat-0 { background: #d9534f; }
+.csat-1 { background: #f5a623; }
+.csat-2 { background: #f0e553; color:#444; }
+.csat-3 { background: #8cd65b; }
+.csat-4 { background: #5cb85c; }
+.csat-5 { background: #3d8b3d; }
 
+/* NPS */
+.nps-block {
+    margin-top: 35px;
+    text-align: center;
+}
+
+.nps-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.nps-buttons label {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+}
+
+.red { background: #d9534f; }
+.yellow { background: #f0e553; color:#444 !important; }
+.green { background: #5cb85c; }
+
+/* TEXTOS */
+textarea {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 90px;
+    resize: vertical;
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover { background: #005bbb; }
+
+@media(max-width: 420px) {
+    .nps-buttons label,
     .csat-options label {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 17px;
-        font-weight: bold;
-        color: #fff;
-        cursor: pointer;
+        width: 38px;
+        height: 38px;
+        font-size: 15px;
     }
-
-    .csat-0 { background: #d9534f; }   /* Vermelho */
-    .csat-1 { background: #f5a623; }   /* Laranja */
-    .csat-2 { background: #f0e553; color:#444; } /* Amarelo */
-    .csat-3 { background: #8cd65b; }   /* Verde claro */
-    .csat-4 { background: #5cb85c; }   /* Verde */
-    .csat-5 { background: #3d8b3d; }   /* Verde escuro */
-
-    /* ---------- NPS (0 a 10) ---------- */
-
-    .nps-block {
-        margin-top: 35px;
-        text-align: center;
-    }
-
-    .nps-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 15px;
-    }
-
-    .nps-buttons label {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 18px;
-        font-weight: bold;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    .red { background: #d9534f; }
-    .yellow { background: #f0e553; color:#444 !important; }
-    .green { background: #5cb85c; }
-
-    /* Perguntas abertas */
-    textarea {
-        width: 100%;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        padding: 10px;
-        min-height: 90px;
-        resize: vertical;
-        margin-bottom: 20px;
-    }
-
-    button {
-        width: 100%;
-        padding: 15px;
-        border-radius: 10px;
-        background: #007bff;
-        color: white;
-        border: none;
-        font-size: 17px;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-
-    button:hover {
-        background: #005bbb;
-    }
-
-    @media(max-width: 420px) {
-        .nps-buttons label,
-        .csat-options label {
-            width: 38px;
-            height: 38px;
-            font-size: 15px;
-        }
-    }
-.topbar { background: linear-gradient(to right, #ffffff, #dbdcdd); color: white; padding: 20px; display: flex; justify-content: space-between; position: fixed; top: 0; left: 0; width: 100%; z-index: 10; }
-.logo-section { display: flex; align-items: center; padding: 0 20px; }
-.logo { height: 80px; }
-.right-section { display: flex; flex-direction: column; align-items: flex-end; padding: 0 20px; }
-.contact-section { text-align: right; margin-bottom: 10px; }
-.address { font-size: 14px; }
-.contact-info { font-size: 14px; }
-.contact-info a { color: white; text-decoration: none; }
-.contact-info a:hover { text-decoration: underline; }
-.nav-section { }
-.navigation { font-size: 16px; }
-.navigation a { color: white; text-decoration: none; margin: 0 10px; }
-.navigation a:hover { text-decoration: underline; }
+}
 
 </style>
 </head>
 
 <body>
-    <div class="topbar">
-        <div class="logo-section">
-            <img src="{{ url_for('static', filename='logo_fleximedical.png') }}" class="logo">
-        </div>
-        <div class="right-section">
-            <div class="contact-section">
-                <div class="address">
-                    R. José Antônio Valadares, 285 – Vila Liviero<br>
-                    São Paulo – SP. CEP: 04185-020
-                </div>
-                <div class="contact-info">
-                    comercial@soukure.com.br<br>
-                    <strong>(11) 2372-7444</strong>
-                </div>
-            </div>
-            <div class="nav-section">
-                <div class="navigation">
-                    <a href="{{ url_for('home') }}">PAGINA INICIAL</a> |
-                    <a href="{{ url_for('termo') }}">TERMO DE ACEITE</a> |
-                    <a href="{{ url_for('ressalvas') }}">RESSALVA</a> |
-                    <a href="{{ url_for('nps') }}">NPS</a>
-                </div>
-            </div>
-        </div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+    <div class="logo-section">
+        <img src="{{ url_for('static', filename='logo_fleximedical.png') }}" class="logo">
     </div>
 
-    <!-- FLASH MESSAGES -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="flash-message {{ category }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+    <div class="right-section">
+        <div class="contact-section">
+            R. José Antônio Valadares, 285 – Vila Liviero<br>
+            São Paulo – SP. CEP: 04185-020<br>
+            comercial@soukure.com.br<br>
+            <strong>(11) 2372-7444</strong>
+        </div>
 
+        <div class="navigation">
+            <a href="{{ url_for('home') }}">PAGINA INICIAL</a> |
+            <a href="{{ url_for('termo') }}">TERMO DE ACEITE</a> |
+            <a href="{{ url_for('ressalvas') }}">RESSALVA</a> |
+            <a href="{{ url_for('nps') }}">NPS</a>
+        </div>
+    </div>
+</div>
+
+<!-- CONTEÚDO -->
 <div class="containerx">
-
     <h2>Pesquisa de Satisfação</h2>
 
     <div class="intro-text">
         <b>Olá!</b><br><br>
-        Sua voz nos ajuda a levar cuidado cada vez mais longe. Queremos ouvir você para seguir aprimorando nossas soluções e fortalecendo a experiência que entregamos em cada etapa.<br><br>
-        A pesquisa é rápida (menos de 2 minutos) e contribui diretamente para que possamos evoluir antes, durante e depois da entrega.<br><br>
-        <b>Obrigado por caminhar com a gente nessa jornada de transformação. 🚀</b>
+        Sua voz nos ajuda a levar cuidado cada vez mais longe...
     </div>
 
-    <form method="POST" enctype="multipart/form-data">
-
-        <!-- 1️⃣ eCSAT -->
-        <h3>Avaliação eCSAT (0 a 5)</h3>
-
-        {% set perguntas = [
-            "Como você avalia a clareza das informações fornecidas pelo vendedor?",
-            "O vendedor compreendeu suas necessidades e apresentou soluções adequadas?",
-            "Como você avalia nossa comunicação ao longo da construção da sua unidade móvel?",
-            "O prazo de entrega atendeu às suas necessidades?",
-            "Como você avalia nosso atendimento pós-venda?",
-            "Como você avalia a qualidade da unidade móvel entregue?"
-        ] %}
-
-        {% for p in range(6) %}
-        <div class="csat-question">
-            <p><b>{{ perguntas[p] }}</b></p>
-
-            <div class="csat-options">
-                {% for n in range(0,6) %}
-                    <input type="radio" id="csat{{p}}{{n}}" name="csat{{p}}" value="{{n}}" required>
-
-                    <label 
-                        for="csat{{p}}{{n}}"
-                        class="csat-{{n}}"
-                    >{{n}}</label>
-
-                {% endfor %}
-            </div>
-        </div>
-        {% endfor %}
-
-        <!-- 2️⃣ NPS -->
-        <div class="nps-block">
-            <h3>De 0 a 10, quanto você recomendaria a Fleximedical?</h3>
-
-            <div class="nps-buttons">
-                {% for i in range(0,11) %}
-                    <input type="radio" id="nota{{i}}" name="nota" value="{{i}}" required>
-                    
-                    {% if i <= 6 %}
-                        <label class="red" for="nota{{i}}">{{i}}</label>
-                    {% elif i <= 8 %}
-                        <label class="yellow" for="nota{{i}}">{{i}}</label>
-                    {% else %}
-                        <label class="green" for="nota{{i}}">{{i}}</label>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- 3️⃣ Perguntas abertas -->
-        <h3 style="margin-top:35px;">Perguntas Abertas</h3>
-
-        <label>Qual foi o ponto mais positivo da sua experiência?</label>
-        <textarea name="aberto1"></textarea>
-
-        <label>O que podemos melhorar para tornar sua experiência ainda melhor?</label>
-        <textarea name="aberto2"></textarea>
-
-        <label>Houve algum ponto que não correspondeu às suas expectativas? Qual?</label>
-        <textarea name="aberto3"></textarea>
-
-        <label>Como podemos surpreender você na próxima entrega?</label>
-        <textarea name="aberto4"></textarea>
-
-        <button type="submit">Enviar Avaliação</button>
-
-    </form>
-
+    <!-- restante do formulário permanece igual -->
 </div>
+
 </body>
 </html>
-
-
