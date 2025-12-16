@@ -25,8 +25,8 @@ body {
     background: #ffffff;
     border-bottom: 1px solid #e5e5e5;
     padding: 14px 24px;
-    display: grid;
-    grid-template-columns: auto 1fr;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     position: fixed;
     top: 0;
@@ -47,31 +47,6 @@ body {
     width: auto;
 }
 
-/* BLOCO DIREITO */
-.right-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 6px;
-}
-
-/* CONTATO */
-.contact-section {
-    text-align: right;
-    font-size: 13px;
-    color: #555;
-    line-height: 1.35;
-}
-
-.contact-info {
-    font-size: 13px;
-    color: #444;
-}
-
-.contact-info strong {
-    color: #333;
-}
-
 /* MENU */
 .navigation {
     font-size: 13px;
@@ -90,18 +65,23 @@ body {
     text-decoration: underline;
 }
 
-/* =================== RESPONSIVO (SEM MUDAR LAYOUT) =================== */
-@media (max-width: 900px) {
+/* =================== RESPONSIVO =================== */
+@media (max-width: 768px) {
+    .topbar {
+        flex-direction: column;
+        padding: 10px 16px;
+        gap: 10px;
+    }
     .logo { height: 48px; }
-    .contact-section,
-    .contact-info { font-size: 12px; }
     .navigation { font-size: 12px; }
+    .navigation a { margin: 0 6px; }
 }
 
-@media (max-width: 600px) {
-    .topbar { padding: 10px 16px; }
-    .logo { height: 42px; }
-    .navigation a { margin: 0 6px; }
+@media (max-width: 480px) {
+    .topbar { padding: 8px 12px; }
+    .logo { height: 40px; }
+    .navigation { font-size: 11px; }
+    .navigation a { margin: 0 4px; }
 }
 
 /* =================== CONTAINER =================== */
@@ -245,33 +225,101 @@ button:hover { background: #005bbb; }
         <img src="{{ url_for('static', filename='logo_fleximedical.png') }}" class="logo">
     </div>
 
-    <div class="right-section">
-        <div class="contact-section">
-            R. José Antônio Valadares, 285 – Vila Liviero<br>
-            São Paulo – SP. CEP: 04185-020<br>
-            comercial@soukure.com.br<br>
-            <strong>(11) 2372-7444</strong>
-        </div>
-
-        <div class="navigation">
-            <a href="{{ url_for('home') }}">PAGINA INICIAL</a> |
-            <a href="{{ url_for('termo') }}">TERMO DE ACEITE</a> |
-            <a href="{{ url_for('ressalvas') }}">RESSALVA</a> |
-            <a href="{{ url_for('nps') }}">NPS</a>
-        </div>
+    <div class="navigation">
+        <a href="{{ url_for('home') }}">PAGINA INICIAL</a> |
+        <a href="{{ url_for('termo') }}">TERMO DE ACEITE</a> |
+        <a href="{{ url_for('ressalvas') }}">RESSALVA</a> |
+        <a href="{{ url_for('nps') }}">NPS</a>
     </div>
 </div>
 
 <!-- CONTEÚDO -->
 <div class="containerx">
+    <div class="contact-section">
+        R. José Antônio Valadares, 285 – Vila Liviero<br>
+        São Paulo – SP. CEP: 04185-020<br>
+        comercial@soukure.com.br<br>
+        <strong>(11) 2372-7444</strong>
+    </div>
+
     <h2>Pesquisa de Satisfação</h2>
 
     <div class="intro-text">
         <b>Olá!</b><br><br>
-        Sua voz nos ajuda a levar cuidado cada vez mais longe...
+        Sua voz nos ajuda a levar cuidado cada vez mais longe. Queremos ouvir você para seguir aprimorando nossas soluções e fortalecendo a experiência que entregamos em cada etapa.<br><br>
+        A pesquisa é rápida (menos de 2 minutos) e contribui diretamente para que possamos evoluir antes, durante e depois da entrega.<br><br>
+        <b>Obrigado por caminhar com a gente nessa jornada de transformação. 🚀</b>
     </div>
 
-    <!-- restante do formulário permanece igual -->
+    <form method="POST" enctype="multipart/form-data">
+
+        <!-- 1️⃣ eCSAT -->
+        <h3>Avaliação eCSAT (0 a 5)</h3>
+
+        {% set perguntas = [
+            "Como você avalia a clareza das informações fornecidas pelo vendedor?",
+            "O vendedor compreendeu suas necessidades e apresentou soluções adequadas?",
+            "Como você avalia nossa comunicação ao longo da construção da sua unidade móvel?",
+            "O prazo de entrega atendeu às suas necessidades?",
+            "Como você avalia nosso atendimento pós-venda?",
+            "Como você avalia a qualidade da unidade móvel entregue?"
+        ] %}
+
+        {% for p in range(6) %}
+        <div class="csat-question">
+            <p><b>{{ perguntas[p] }}</b></p>
+
+            <div class="csat-options">
+                {% for n in range(0,6) %}
+                    <input type="radio" id="csat{{p}}{{n}}" name="csat{{p}}" value="{{n}}" required>
+
+                    <label 
+                        for="csat{{p}}{{n}}"
+                        class="csat-{{n}}"
+                    >{{n}}</label>
+
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- 2️⃣ NPS -->
+        <div class="nps-block">
+            <h3>De 0 a 10, quanto você recomendaria a Fleximedical?</h3>
+
+            <div class="nps-buttons">
+                {% for i in range(0,11) %}
+                    <input type="radio" id="nota{{i}}" name="nota" value="{{i}}" required>
+                    
+                    {% if i <= 6 %}
+                        <label class="red" for="nota{{i}}">{{i}}</label>
+                    {% elif i <= 8 %}
+                        <label class="yellow" for="nota{{i}}">{{i}}</label>
+                    {% else %}
+                        <label class="green" for="nota{{i}}">{{i}}</label>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- 3️⃣ Perguntas abertas -->
+        <h3 style="margin-top:35px;">Perguntas Abertas</h3>
+
+        <label>Qual foi o ponto mais positivo da sua experiência?</label>
+        <textarea name="aberto1"></textarea>
+
+        <label>O que podemos melhorar para tornar sua experiência ainda melhor?</label>
+        <textarea name="aberto2"></textarea>
+
+        <label>Houve algum ponto que não correspondeu às suas expectativas? Qual?</label>
+        <textarea name="aberto3"></textarea>
+
+        <label>Como podemos surpreender você na próxima entrega?</label>
+        <textarea name="aberto4"></textarea>
+
+        <button type="submit">Enviar Avaliação</button>
+
+    </form>
 </div>
 
 </body>
