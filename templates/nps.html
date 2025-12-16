@@ -24,15 +24,16 @@ body {
 .topbar {
     background: #ffffff;
     border-bottom: 1px solid #e5e5e5;
-    padding: 14px 24px;
+    padding: 20px 24px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 10;
+    min-height: 100px;
 }
 
 /* LOGOS */
@@ -43,8 +44,33 @@ body {
 }
 
 .logo {
-    height: 56px;
+    height: 80px;
     width: auto;
+}
+
+/* BLOCO DIREITO */
+.right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+/* CONTATO */
+.contact-section {
+    text-align: right;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.35;
+}
+
+.contact-info {
+    font-size: 13px;
+    color: #444;
+}
+
+.contact-info strong {
+    color: #333;
 }
 
 /* MENU */
@@ -58,7 +84,7 @@ body {
 .navigation a {
     color: #4b3b6e;
     text-decoration: none;
-    margin: 0 8px;
+    margin: 0 6px;
 }
 
 .navigation a:hover {
@@ -69,19 +95,23 @@ body {
 @media (max-width: 768px) {
     .topbar {
         flex-direction: column;
-        padding: 10px 16px;
+        align-items: center;
+        padding: 15px 16px;
         gap: 10px;
+        min-height: auto;
     }
-    .logo { height: 48px; }
+    .logo { height: 60px; }
+    .right-section { align-items: center; }
+    .contact-section { text-align: center; }
     .navigation { font-size: 12px; }
-    .navigation a { margin: 0 6px; }
+    .navigation a { margin: 0 4px; }
 }
 
 @media (max-width: 480px) {
-    .topbar { padding: 8px 12px; }
-    .logo { height: 40px; }
+    .topbar { padding: 10px 12px; }
+    .logo { height: 50px; }
     .navigation { font-size: 11px; }
-    .navigation a { margin: 0 4px; }
+    .navigation a { margin: 0 3px; }
 }
 
 /* =================== CONTAINER =================== */
@@ -235,13 +265,6 @@ button:hover { background: #005bbb; }
 
 <!-- CONTEÚDO -->
 <div class="containerx">
-    <div class="contact-section">
-        R. José Antônio Valadares, 285 – Vila Liviero<br>
-        São Paulo – SP. CEP: 04185-020<br>
-        comercial@soukure.com.br<br>
-        <strong>(11) 2372-7444</strong>
-    </div>
-
     <h2>Pesquisa de Satisfação</h2>
 
     <div class="intro-text">
