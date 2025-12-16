@@ -282,9 +282,85 @@ button:hover {
 
 <!-- ===== CONTEÚDO ===== -->
 <div class="containerx">
-    <!-- formulário permanece inalterado -->
-    <!-- (mantive exatamente como você enviou) -->
+      <div class="intro-text">
+        <b>Olá!</b><br><br>
+        Sua voz nos ajuda a levar cuidado cada vez mais longe. Queremos ouvir você para seguir aprimorando nossas soluções e fortalecendo a experiência que entregamos em cada etapa.<br><br>
+        A pesquisa é rápida (menos de 2 minutos) e contribui diretamente para que possamos evoluir antes, durante e depois da entrega.<br><br>
+        <b>Obrigado por caminhar com a gente nessa jornada de transformação. 🚀</b>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        <!-- 1️⃣ eCSAT -->
+        <h3>Avaliação eCSAT (0 a 5)</h3>
+
+        {% set perguntas = [
+            "Como você avalia a clareza das informações fornecidas pelo vendedor?",
+            "O vendedor compreendeu suas necessidades e apresentou soluções adequadas?",
+            "Como você avalia nossa comunicação ao longo da construção da sua unidade móvel?",
+            "O prazo de entrega atendeu às suas necessidades?",
+            "Como você avalia nosso atendimento pós-venda?",
+            "Como você avalia a qualidade da unidade móvel entregue?"
+        ] %}
+
+        {% for p in range(6) %}
+        <div class="csat-question">
+            <p><b>{{ perguntas[p] }}</b></p>
+
+            <div class="csat-options">
+                {% for n in range(0,6) %}
+                    <input type="radio" id="csat{{p}}{{n}}" name="csat{{p}}" value="{{n}}" required>
+
+                    <label 
+                        for="csat{{p}}{{n}}"
+                        class="csat-{{n}}"
+                    >{{n}}</label>
+
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <!-- 2️⃣ NPS -->
+        <div class="nps-block">
+            <h3>De 0 a 10, quanto você recomendaria a Fleximedical?</h3>
+
+            <div class="nps-buttons">
+                {% for i in range(0,11) %}
+                    <input type="radio" id="nota{{i}}" name="nota" value="{{i}}" required>
+                    
+                    {% if i <= 6 %}
+                        <label class="red" for="nota{{i}}">{{i}}</label>
+                    {% elif i <= 8 %}
+                        <label class="yellow" for="nota{{i}}">{{i}}</label>
+                    {% else %}
+                        <label class="green" for="nota{{i}}">{{i}}</label>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- 3️⃣ Perguntas abertas -->
+        <h3 style="margin-top:35px;">Perguntas Abertas</h3>
+
+        <label>Qual foi o ponto mais positivo da sua experiência?</label>
+        <textarea name="aberto1"></textarea>
+
+        <label>O que podemos melhorar para tornar sua experiência ainda melhor?</label>
+        <textarea name="aberto2"></textarea>
+
+        <label>Houve algum ponto que não correspondeu às suas expectativas? Qual?</label>
+        <textarea name="aberto3"></textarea>
+
+        <label>Como podemos surpreender você na próxima entrega?</label>
+        <textarea name="aberto4"></textarea>
+
+        <button type="submit">Enviar Avaliação</button>
+
+    </form>
+
 </div>
 
 </body>
 </html>
+
