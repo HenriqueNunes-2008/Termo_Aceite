@@ -16,10 +16,10 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding-top: 120px; /* espaço real da topbar */
+    padding-top: 120px;
 }
 
-/* ===== TOPBAR (IMPLEMENTADA DO PRIMEIRO CÓDIGO) ===== */
+/* ===== TOPBAR ===== */
 .topbar {
     background: #ffffff;
     color: #00008B;
@@ -35,13 +35,11 @@ body {
     border-left: 1px solid #00008B;
 }
 
-/* LOGO */
 .logo-fixed {
     height: 300px;
     margin-right: -10%;
 }
 
-/* BLOCO CENTRAL */
 .middle-section {
     display: flex;
     justify-content: center;
@@ -64,98 +62,17 @@ body {
     color: #00008B;
 }
 
-.contact-info a {
-    color: #00008B;
-    text-decoration: none;
-}
-
-.contact-info a:hover {
-    text-decoration: underline;
-}
-
-/* NAVEGAÇÃO */
 .nav-section {
     display: flex;
-    justify-content: left;
     align-items: center;
     padding: 0 20px;
     flex: 1;
-}
-
-.navigation {
-    font-size: 16px;
-    color: #00008B;
 }
 
 .navigation a {
     color: #00008B;
     text-decoration: none;
     margin: 0 5px;
-}
-
-.navigation a:hover {
-    text-decoration: underline;
-}
-
-/* ===== RESPONSIVO TOPBAR ===== */
-@media(max-width: 768px) {
-    .topbar {
-        padding-left: 50px;
-        height: auto;
-        padding-bottom: 10px;
-        flex-wrap: wrap;
-    }
-
-    .logo-fixed {
-        height: 40px;
-        margin-right: 0;
-    }
-
-    .middle-section {
-        padding: 10px;
-        border-right: none;
-        border-bottom: 1px solid #00008B;
-        margin-left: 0;
-        width: 100%;
-    }
-
-    .address {
-        margin-right: 0;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    .nav-section {
-        padding: 10px;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .navigation {
-        font-size: 12px;
-    }
-}
-
-@media(max-width: 480px) {
-    .topbar {
-        padding-left: 45px;
-    }
-
-    .logo-fixed {
-        height: 35px;
-    }
-
-    .address {
-        font-size: 12px;
-    }
-
-    .contact-info {
-        font-size: 10px;
-    }
-
-    .navigation {
-        font-size: 11px;
-    }
 }
 
 /* ===== CONTAINER ===== */
@@ -168,11 +85,10 @@ body {
     box-shadow: 0 0 20px rgba(0,0,0,0.15);
 }
 
-/* ===== CONTEÚDO ===== */
-h2, h3 {
+/* ===== TEXTO ===== */
+h3 {
     text-align: center;
     color: #444;
-    font-weight: bold;
 }
 
 .intro-text {
@@ -181,10 +97,9 @@ h2, h3 {
     border-radius: 10px;
     margin-bottom: 25px;
     font-size: 15px;
-    line-height: 1.45;
 }
 
-/* BOTÕES */
+/* ===== INPUTS ===== */
 input[type="radio"] {
     display: none;
 }
@@ -195,27 +110,22 @@ input[type="radio"]:checked + label {
     transition: 0.2s;
 }
 
-/* CSAT */
-.csat-options {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.csat-options label,
-
+/* ===== CSAT + NPS (LAYOUT CORRETO) ===== */
+.csat-options,
 .nps-buttons {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
+    flex-wrap: wrap;
     margin-bottom: 25px;
 }
 
+.csat-options label,
 .nps-buttons label {
     width: 45px;
     height: 45px;
+    min-width: 45px;
+    min-height: 45px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -225,6 +135,7 @@ input[type="radio"]:checked + label {
     color: #fff;
 }
 
+/* ===== CORES ===== */
 .csat-0 { background: #d9534f; }
 .csat-1 { background: #f5a623; }
 .csat-2 { background: #f0e553; color:#444; }
@@ -236,6 +147,7 @@ input[type="radio"]:checked + label {
 .yellow { background: #f0e553; color:#444 !important; }
 .green { background: #5cb85c; }
 
+/* ===== TEXTAREA / BOTÃO ===== */
 textarea {
     width: 100%;
     border-radius: 8px;
@@ -291,86 +203,62 @@ button:hover {
 
 <!-- ===== CONTEÚDO ===== -->
 <div class="containerx">
-      <div class="intro-text">
-        <b>Olá!</b><br><br>
-        Sua voz nos ajuda a levar cuidado cada vez mais longe. Queremos ouvir você para seguir aprimorando nossas soluções e fortalecendo a experiência que entregamos em cada etapa.<br><br>
-        A pesquisa é rápida (menos de 2 minutos) e contribui diretamente para que possamos evoluir antes, durante e depois da entrega.<br><br>
-        <b>Obrigado por caminhar com a gente nessa jornada de transformação. 🚀</b>
-    </div>
 
-    <form method="POST" enctype="multipart/form-data">
+<div class="intro-text">
+<b>Olá!</b><br><br>
+Sua voz nos ajuda a evoluir continuamente. A pesquisa é rápida e essencial para aprimorarmos nossos serviços.<br><br>
+<b>Obrigado pela participação!</b>
+</div>
 
-        <!-- 1️⃣ eCSAT -->
-        <h3>Avaliação eCSAT (0 a 5)</h3>
+<form method="POST">
 
-        {% set perguntas = [
-            "Como você avalia a clareza das informações fornecidas pelo vendedor?",
-            "O vendedor compreendeu suas necessidades e apresentou soluções adequadas?",
-            "Como você avalia nossa comunicação ao longo da construção da sua unidade móvel?",
-            "O prazo de entrega atendeu às suas necessidades?",
-            "Como você avalia nosso atendimento pós-venda?",
-            "Como você avalia a qualidade da unidade móvel entregue?"
-        ] %}
+<h3>Avaliação eCSAT (0 a 5)</h3>
 
-        {% for p in range(6) %}
-        <div class="csat-question">
-            <p><b>{{ perguntas[p] }}</b></p>
+{% set perguntas = [
+"Como você avalia a clareza das informações fornecidas?",
+"O vendedor compreendeu suas necessidades?",
+"Como foi nossa comunicação?",
+"O prazo atendeu às expectativas?",
+"Como foi o pós-venda?",
+"Qualidade da unidade entregue?"
+] %}
 
-            <div class="csat-options">
-                {% for n in range(0,6) %}
-                    <input type="radio" id="csat{{p}}{{n}}" name="csat{{p}}" value="{{n}}" required>
+{% for p in range(6) %}
+<p><b>{{ perguntas[p] }}</b></p>
+<div class="csat-options">
+{% for n in range(0,6) %}
+<input type="radio" id="csat{{p}}{{n}}" name="csat{{p}}" value="{{n}}" required>
+<label for="csat{{p}}{{n}}" class="csat-{{n}}">{{n}}</label>
+{% endfor %}
+</div>
+{% endfor %}
 
-                    <label 
-                        for="csat{{p}}{{n}}"
-                        class="csat-{{n}}"
-                    >{{n}}</label>
+<h3>De 0 a 10, quanto você recomendaria a Fleximedical?</h3>
 
-                {% endfor %}
-            </div>
-        </div>
-        {% endfor %}
+<div class="nps-buttons">
+{% for i in range(0,11) %}
+<input type="radio" id="nota{{i}}" name="nota" value="{{i}}" required>
+{% if i <= 6 %}
+<label class="red" for="nota{{i}}">{{i}}</label>
+{% elif i <= 8 %}
+<label class="yellow" for="nota{{i}}">{{i}}</label>
+{% else %}
+<label class="green" for="nota{{i}}">{{i}}</label>
+{% endif %}
+{% endfor %}
+</div>
 
-        <!-- 2️⃣ NPS -->
-        <div class="nps-block">
-            <h3>De 0 a 10, quanto você recomendaria a Fleximedical?</h3>
+<h3>Perguntas Abertas</h3>
 
-            <div class="nps-buttons">
-                {% for i in range(0,11) %}
-                    <input type="radio" id="nota{{i}}" name="nota" value="{{i}}" required>
-                    
-                    {% if i <= 6 %}
-                        <label class="red" for="nota{{i}}">{{i}}</label>
-                    {% elif i <= 8 %}
-                        <label class="yellow" for="nota{{i}}">{{i}}</label>
-                    {% else %}
-                        <label class="green" for="nota{{i}}">{{i}}</label>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
+<textarea name="aberto1" placeholder="Ponto positivo"></textarea>
+<textarea name="aberto2" placeholder="O que podemos melhorar"></textarea>
+<textarea name="aberto3" placeholder="Algo não atendeu às expectativas?"></textarea>
+<textarea name="aberto4" placeholder="Como podemos surpreender você?"></textarea>
 
-        <!-- 3️⃣ Perguntas abertas -->
-        <h3 style="margin-top:35px;">Perguntas Abertas</h3>
+<button type="submit">Enviar Avaliação</button>
 
-        <label>Qual foi o ponto mais positivo da sua experiência?</label>
-        <textarea name="aberto1"></textarea>
-
-        <label>O que podemos melhorar para tornar sua experiência ainda melhor?</label>
-        <textarea name="aberto2"></textarea>
-
-        <label>Houve algum ponto que não correspondeu às suas expectativas? Qual?</label>
-        <textarea name="aberto3"></textarea>
-
-        <label>Como podemos surpreender você na próxima entrega?</label>
-        <textarea name="aberto4"></textarea>
-
-        <button type="submit">Enviar Avaliação</button>
-
-    </form>
-
+</form>
 </div>
 
 </body>
 </html>
-
-
