@@ -1,11 +1,34 @@
 from flask import Flask, render_template, send_file, request, session, redirect, url_for, flash
 from werkzeug.utils import secure_filename
+from supabase import create_client, Client
 import pdfkit
 import os
 import uuid
 import base64
 import platform
 import shutil
+
+# Configurações do Supabase (use variáveis de ambiente)
+SUPABASE_URL = 'https://lfiolygelhjlcwvevkjt.supabase.co'
+SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmaW9seWdlbGhqbGN3dmV2a2p0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAyMDAzMzksImV4cCI6MjA4NTc3NjMzOX0.8xN_kvUBTVth48lvqgUFgij-XXXKQVK3qy81F1DD3Qc'  # Ou SERVICE_ROLE_KEY para uploads
+
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+# Exemplo: Salvar termo_aceite
+def salvar_termo(dados):
+    response = supabase.table('termo_aceite').insert(dados).execute()
+    return response.data
+
+# Exemplo: Upload de PDF para Storage
+def upload_pdf(file_path, file_name):
+    with open(file_path, 'rb') as f:
+        supabase.storage.from_('pdfs').upload(file_name, f)
+    pdf_url = supabase.storage.from_('pdfs').get_public_url(file_name)
+    return pdf_url
+
+# Substitua registros_termos.append(registro) por salvar_termo(registro)
+# Gere PDF, faça upload e salve pdf_url no banco.
+
 
 app = Flask(__name__, static_folder='Static')
 app.config["UPLOAD_FOLDER"] = "static/uploads"
@@ -47,7 +70,11 @@ def termo():
         registro_id = str(uuid.uuid4())
         registro['id'] = registro_id
 
-        registros_termos.append(registro)
+        # Handle empty date field
+        if registro.get('data') == '':
+            registro['data'] = None
+
+        salvar_termo(registro)
         session['registro_id'] = registro_id
 
         flash("Termo salvo com sucesso!", "success")
